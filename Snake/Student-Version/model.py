@@ -1,21 +1,25 @@
 import torch
 import torch.nn as nn
 
-
+#QNetwork is our main model in this problem
 class QNetwork(nn.Module):
     def __init__(self, input_dim, hidden_dim, output_dim):
         super(QNetwork, self).__init__()
-        self.fc1 = None  # TODO
-        self.fc2 = None  # TODO
-        self.fc3 = None  # TODO
-        self.fc4 = None  # TODO
+        #four initial linear layers for our prediction representation
+        self.fc1 = nn.Linear(input_dim, hidden_dim)
+        self.fc2 = nn.Linear(hidden_dim, hidden_dim)
+        self.fc3 = nn.Linear(hidden_dim, hidden_dim)
+        self.fc4 = nn.Linear(hidden_dim, output_dim)
+        #this is how we model our last outputs with relu layer
         self.relu = nn.ReLU()
 
     def forward(self, x):
-        l1 = None  # TODO
-        l2 = None  # TODO
-        l3 = None  # TODO
-        l4 = None  # TODO
+        #this is the main rule for model the problems! we will give our linear layers to relu function(or sigmoid) for better modeling \
+        # and representation of our model
+        l1 = self.relu(self.fc1(x.float()))
+        l2 = self.relu(self.fc2(l1))
+        l3 = self.relu(self.fc3(l2))
+        l4 = self.fc4(l3)
         return l4
 
 
