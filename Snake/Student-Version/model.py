@@ -22,7 +22,7 @@ class QNetwork(nn.Module):
         l4 = self.fc4(l3)
         return l4
 
-
+#this get network function will give us the initial of current state of apples and snakes
 def get_network_input(player, apple):
     proximity = player.get_proximity()
     x = torch.cat([torch.from_numpy(player.pos).double(), torch.from_numpy(apple.pos).double(),
